@@ -10,11 +10,12 @@ using namespace std;
 int N, M;
 int S, E;
 vector<pair<int,int>>v[100001];
-queue<int>q;
-bool visited[100001];
+int visited[100001];
 bool BFS(int cost)
 {
+	queue<int>q;
 	q.push(S);
+	visited[S] = 1;
 	while (!q.empty())
 	{
 		int cur = q.front();
@@ -28,7 +29,7 @@ bool BFS(int cost)
 			int n_c = v[cur][i].second;
 			if (!visited[n_x] && cost <= n_c)
 			{
-				visited[n_x] = true;
+				visited[n_x] = 1;
 				q.push(n_x);
 			}
 		}
@@ -56,7 +57,7 @@ int main()
 	int res = 0;
 	while (left <= right)
 	{
-		memset(visited, false, sizeof(visited));
+		fill(visited, visited + 100001, 0);
 		int mid = (left + right) / 2;
 		if (BFS(mid))
 			left = mid + 1;
