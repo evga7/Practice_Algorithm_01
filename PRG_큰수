@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+#include <unordered_map>
+#define MAX 987654321
+#define MIN -987654321
+using namespace std;
+typedef long long int ll;
+typedef pair<int, int> pi;
+typedef pair<int, string> pi3;
+typedef pair<int, pair<int, int>> pi2;
+int dx[4] = {0, -1, 0, 1};
+int dy[4] = {-1, 0, 1, 0};
+ll res = 0;
+int N, M;
+deque<char>dq;
+string solution(string number, int k) {
+    string answer = "";
+    char m=number[0];
+    int idx=0;
+    int i;
+    while(k&&idx<number.size())
+    {
+        while(!dq.empty()&&dq.back()<number[idx]&&k)
+        {
+            dq.pop_back();
+            k--;
+        }
+        dq.push_back(number[idx]);
+        idx++;
+    }
+    for (i=idx;i<number.size();i++)
+    dq.push_back(number[i]);
+    while(k)
+    {
+        k--;
+        dq.pop_back();
+    }
+    for (auto c:dq)
+    answer+=c;
+
+    return answer;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    cout << solution("99991",3);
+}
+
